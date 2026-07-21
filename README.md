@@ -121,3 +121,7 @@ AI Workforce Assistant/
 **Gayathri Vijay**
 
 HR Professional | HR Analytics | HR Business Partnering | AI for HR
+
+## Disclaimer
+
+Visionary InfoTech Pvt. Ltd. is a fictional company created solely for demonstrating HR analytics, workforce planning, and AI Workforce Assistant capabilities. The employee data used in this project is synthetic and intended for portfolio purposes only.
