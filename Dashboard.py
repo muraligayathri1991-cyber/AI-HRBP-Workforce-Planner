@@ -89,6 +89,6 @@ st.markdown("""
 
 HR Professional with expertise in **HR Analytics, HR Business Partnering, Workforce Planning, and AI-driven HR solutions**. Passionate about leveraging technology to improve people processes and business decision-making.
 
-🔗 **GitHub:** https://github.com/muraligayathri1991-cyber
+
 
 """)
