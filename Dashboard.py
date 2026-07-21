@@ -1,277 +1,94 @@
 import streamlit as st
-import pandas as pd
-from openpyxl import Workbook
-from openpyxl.styles import Font
-from io import BytesIO
 
-from sidebar import sidebar_filters
 from header import show_header
 from theme import apply_theme
 
-# =====================================================
+# ==========================================
 # PAGE CONFIG
-# =====================================================
+# ==========================================
 
 st.set_page_config(
-    page_title="Visionary InfoTech | Dashboard",
-    page_icon="🏢",
+    page_title="Visionary InfoTech | About Project",
+    page_icon="ℹ️",
     layout="wide"
 )
+
 apply_theme()
-
-# =====================================================
-# READ EMPLOYEE DATA
-# =====================================================
-
-employees = pd.read_excel(
-    "data/Visionary_InfoTech_Employee_Master_Data.xlsx"
-)
-
-# Apply Sidebar Filters
-employees = sidebar_filters(employees)
-
-# =====================================================
-# COMPANY HEADER
-# =====================================================
-
 show_header()
 
-# =====================================================
-# DASHBOARD INTRODUCTION
-# =====================================================
+st.title("🤖 AI Workforce Assistant")
+st.caption("An AI-powered HR Analytics & Workforce Planning Solution")
 
-st.info(
-    """
-👋 **Welcome to the Visionary InfoTech Workforce Intelligence Dashboard**
+st.markdown("""
+## About this Project
 
-This platform enables HR Business Partners to monitor workforce trends,
-analyze organizational data, and make informed people decisions through
-interactive analytics and AI-powered insights.
-"""
-)
+The **AI HRBP Workforce Planner** is a portfolio project that demonstrates how Artificial Intelligence can support HR Business Partners in workforce planning, employee analytics, and decision-making.
 
-# =====================================================
-# EXECUTIVE SUMMARY
-# =====================================================
+This application combines HR analytics dashboards with an AI-powered workforce assistant to help HR teams analyze employee data, answer workforce-related questions, and generate actionable insights.
 
-st.subheader("📊 Executive Summary")
+---
 
-col1, col2, col3 = st.columns(3)
+## Key Features
 
-col1.metric(
-    "👥 Total Employees",
-    len(employees)
-)
+✅ Workforce Directory
 
-col2.metric(
-    "🏢 Departments",
-    employees["Department"].nunique()
-)
+✅ Workforce Analytics Dashboard
 
-col3.metric(
-    "📍 Locations",
-    employees["Location"].nunique()
-)
+✅ HRBP Decision Center
 
-col4, col5, col6 = st.columns(3)
+✅ AI Workforce Assistant
 
-col4.metric(
-    "💼 Designations",
-    employees["Designation"].nunique()
-)
+✅ Interactive Charts
 
-col5.metric(
-    "📈 Avg Experience",
-    f"{employees['Experience (Years)'].mean():.1f} Years"
-)
+✅ Excel Report Export
 
-col6.metric(
-    "🆕 Latest Joiners",
-    len(
-        employees
-        .sort_values("Joining Date", ascending=False)
-        .head(5)
-    )
-)
-# =====================================================
-# WORKFORCE INSIGHTS
-# =====================================================
+✅ PDF Report Export
 
-st.divider()
+✅ Natural Language Queries
 
-st.subheader("📌 Workforce Insights")
+---
 
-department_count = employees["Department"].value_counts()
+## Technology Stack
 
-largest_department = department_count.idxmax()
-largest_department_count = department_count.max()
+- Python
+- Streamlit
+- Pandas
+- Plotly
+- OpenAI / OpenRouter
+- ReportLab
+- OpenPyXL
 
-location_count = employees["Location"].value_counts()
+---
 
-largest_location = location_count.idxmax()
-largest_location_count = location_count.max()
+## HR Use Cases
 
-average_experience = (
-    employees
-    .groupby("Department")["Experience (Years)"]
-    .mean()
-)
+- Workforce Planning
+- Headcount Analysis
+- Department Analytics
+- Gender Diversity Insights
+- Location Analytics
+- Employee Search
+- Executive Reporting
+- AI-powered HR Question Answering
 
-most_experienced_department = average_experience.idxmax()
+---
 
-highest_experience = average_experience.max()
+## Disclaimer
 
-colA, colB, colC = st.columns(3)
+**Visionary InfoTech Pvt. Ltd.** is a fictional company created solely for demonstrating HR analytics, workforce planning, and AI Workforce Assistant capabilities.
 
-colA.metric(
-    "🏢 Largest Department",
-    largest_department,
-    f"{largest_department_count} Employees"
-)
+All employee information used in this application is synthetic and intended only for portfolio and demonstration purposes.
+""")
 
-colB.metric(
-    "📍 Largest Location",
-    largest_location,
-    f"{largest_location_count} Employees"
-)
+st.markdown("---")
 
-colC.metric(
-    "📈 Most Experienced Department",
-    most_experienced_department,
-    f"{highest_experience:.1f} Years"
-)
+st.markdown("""
+## 👩‍💻 About the Developer
 
-# =====================================================
-# RECENT JOINERS
-# =====================================================
+**Gayathri Murali**
 
-st.divider()
+HR Professional with expertise in **HR Analytics, HR Business Partnering, Workforce Planning, and AI-driven HR solutions**. Passionate about leveraging technology to improve people processes and business decision-making.
 
-st.subheader("🆕 Recent Joiners")
+🔗 **GitHub:** https://github.com/muraligayathri1991-cyber
 
-employees["Joining Date"] = pd.to_datetime(
-    employees["Joining Date"]
-)
-
-recent_joiners = (
-    employees
-    .sort_values(
-        "Joining Date",
-        ascending=False
-    )
-    .head(5)
-)
-
-col1, col2 = st.columns(2)
-
-for i, (_, row) in enumerate(recent_joiners.iterrows()):
-
-    if i % 2 == 0:
-        with col1:
-            st.write(
-                f"👤 **{row['Employee Name']}**"
-            )
-
-            st.caption(
-                f"{row['Designation']} | {row['Department']}"
-            )
-
-            st.caption(
-                f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
-            )
-
-            st.markdown("")
-
-    else:
-        with col2:
-            st.write(
-                f"👤 **{row['Employee Name']}**"
-            )
-
-            st.caption(
-                f"{row['Designation']} | {row['Department']}"
-            )
-
-            st.caption(
-                f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
-            )
-
-            st.markdown("")
-
-# =====================================================
-# DASHBOARD REPORT EXPORT
-# =====================================================
-
-st.divider()
-
-st.subheader("📥 Download Dashboard Report")
-
-report_data = pd.DataFrame({
-    "Metric": [
-        "Total Employees",
-        "Departments",
-        "Locations",
-        "Designations",
-        "Average Experience",
-        "Largest Department",
-        "Largest Department Count",
-        "Largest Location",
-        "Largest Location Count",
-        "Most Experienced Department",
-        "Average Experience (Top Department)"
-    ],
-    "Value": [
-        len(employees),
-        employees["Department"].nunique(),
-        employees["Location"].nunique(),
-        employees["Designation"].nunique(),
-        f"{employees['Experience (Years)'].mean():.1f} Years",
-        largest_department,
-        largest_department_count,
-        largest_location,
-        largest_location_count,
-        most_experienced_department,
-        f"{highest_experience:.1f} Years"
-    ]
-})
-
-wb = Workbook()
-
-ws = wb.active
-ws.title = "Dashboard Summary"
-
-ws.append(["Visionary InfoTech Pvt. Ltd."])
-ws.append(["HR Workforce Dashboard Report"])
-ws.append([])
-
-ws.append(list(report_data.columns))
-
-for cell in ws[4]:
-    cell.font = Font(bold=True)
-
-for row in report_data.itertuples(index=False):
-    ws.append(row)
-
-# Auto-fit columns
-for column_cells in ws.columns:
-    length = max(
-        len(str(cell.value)) if cell.value is not None else 0
-        for cell in column_cells
-    )
-
-    ws.column_dimensions[
-        column_cells[0].column_letter
-    ].width = length + 3
-
-excel_file = BytesIO()
-
-wb.save(excel_file)
-
-excel_file.seek(0)
-
-st.download_button(
-    "📥 Download Dashboard Report",
-    data=excel_file,
-    file_name="Visionary_Workforce_Dashboard_Report.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-)
+""")
