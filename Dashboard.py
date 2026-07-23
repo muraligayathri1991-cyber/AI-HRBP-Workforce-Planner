@@ -2,10 +2,11 @@ import streamlit as st
 
 from header import show_header
 from theme import apply_theme
+from card import card
 
-# ==========================================
+# =====================================================
 # PAGE CONFIG
-# ==========================================
+# =====================================================
 
 st.set_page_config(
     page_title="Visionary InfoTech | About Project",
@@ -16,79 +17,138 @@ st.set_page_config(
 apply_theme()
 show_header()
 
+# =====================================================
+# HERO BANNER
+# =====================================================
+
+st.image(
+    "assets/hero_banner.png",
+    use_container_width=True
+)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
 st.title("🤖 AI Workforce Assistant")
-st.caption("An AI-powered HR Analytics & Workforce Planning Solution")
+st.caption("AI-powered HR Analytics & Workforce Planning Solution")
 
-st.markdown("""
-## About this Project
+st.markdown("<br>", unsafe_allow_html=True)
 
-The **AI HRBP Workforce Planner** is a portfolio project that demonstrates how Artificial Intelligence can support HR Business Partners in workforce planning, employee analytics, and decision-making.
+# =====================================================
+# ABOUT PROJECT
+# =====================================================
 
-This application combines HR analytics dashboards with an AI-powered workforce assistant to help HR teams analyze employee data, answer workforce-related questions, and generate actionable insights.
+with st.container():
+    st.subheader("📘 About the Project")
 
----
+    st.write("""
+The **AI Workforce Assistant** is a portfolio project demonstrating how Artificial Intelligence can support HR Business Partners with workforce planning, employee analytics, and strategic decision-making.
 
-## Key Features
+The application combines interactive dashboards, workforce analytics, and an AI-powered assistant capable of answering HR-related questions using employee data. It showcases practical HR use cases such as headcount analysis, workforce distribution, diversity insights, executive reporting, and AI-assisted decision support.
+""")
 
-✅ Workforce Directory
+st.divider()
 
-✅ Workforce Analytics Dashboard
+# =====================================================
+# FEATURES + TECHNOLOGY
+# =====================================================
 
-✅ HRBP Decision Center
+left, right = st.columns([1, 1], gap="large")
 
-✅ AI Workforce Assistant
+with left:
 
-✅ Interactive Charts
+    st.subheader("✨ Key Features")
 
-✅ Excel Report Export
+    st.markdown("""
+- 👥 Workforce Directory
+- 📊 Workforce Analytics Dashboard
+- 🎯 HRBP Decision Center
+- 🤖 AI Workforce Assistant
+- 📈 Interactive Charts
+- 📄 Excel Report Export
+- 📑 PDF Report Export
+- 💬 Natural Language Queries
+""")
 
-✅ PDF Report Export
+with right:
 
-✅ Natural Language Queries
+    st.subheader("🛠 Technology Stack")
 
----
+    st.markdown("""
+- 🐍 Python
+- ⚡ Streamlit
+- 🐼 Pandas
+- 📊 Plotly
+- 🤖 OpenAI / OpenRouter
+- 📄 ReportLab
+- 📗 OpenPyXL
+""")
 
-## Technology Stack
+st.divider()
 
-- Python
-- Streamlit
-- Pandas
-- Plotly
-- OpenAI / OpenRouter
-- ReportLab
-- OpenPyXL
+# =====================================================
+# HR USE CASES
+# =====================================================
 
----
+st.subheader("🎯 HR Use Cases")
 
-## HR Use Cases
+col1, col2 = st.columns(2, gap="large")
 
+with col1:
+
+    st.markdown("""
 - Workforce Planning
 - Headcount Analysis
 - Department Analytics
+- Employee Search
+""")
+
+with col2:
+
+    st.markdown("""
 - Gender Diversity Insights
 - Location Analytics
-- Employee Search
 - Executive Reporting
 - AI-powered HR Question Answering
-
----
-
-## Disclaimer
-
-**Visionary InfoTech Pvt. Ltd.** is a fictional company created solely for demonstrating HR analytics, workforce planning, and AI Workforce Assistant capabilities.
-
-All employee information used in this application is synthetic and intended only for portfolio and demonstration purposes.
 """)
+
+st.divider()
+
+# =====================================================
+# ABOUT THE DEVELOPER
+# =====================================================
+
+st.subheader("👩‍💻 About the Developer")
+
+st.write("""
+**Gayathri Murali**
+
+HR Professional with expertise in **HR Analytics, HR Business Partnering, Workforce Planning, and AI-driven HR Solutions**.
+
+Passionate about leveraging technology to improve people processes, business decision-making, and employee experiences through data and Artificial Intelligence.
+""")
+
+# =====================================================
+# FOOTER
+# =====================================================
 
 st.markdown("---")
 
-st.markdown("""
-## 👩‍💻 About the Developer
+st.markdown(
+    """
+<div style="text-align:center; color:#6B7280; font-size:14px;">
 
-**Gayathri Murali**
+<b>Portfolio Demonstration Notice</b><br><br>
 
-HR Professional with expertise in **HR Analytics, HR Business Partnering, Workforce Planning, and AI-driven HR solutions**. Passionate about leveraging technology to improve people processes and business decision-making.
+Visionary InfoTech Pvt. Ltd. is a fictional organization created solely for demonstrating
+HR Analytics, Workforce Planning, and AI Workforce Assistant capabilities.
+All employee information displayed in this application is synthetic and intended exclusively
+for portfolio and educational purposes. No real employee or organizational data has been used.
 
+<br><br>
 
+© 2026 <b>Gayathri Murali</b> • AI Workforce Assistant Portfolio
 
-""")
+</div>
+""",
+    unsafe_allow_html=True,
+)

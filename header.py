@@ -16,8 +16,11 @@ def show_header():
 
         st.markdown(
             """
-            <h1 style="margin-bottom:0px;
-                       color:#0B3D91;">
+            <h1 style="
+                margin-bottom:0px;
+                color:#0B3D91;
+                font-weight:800;
+            ">
                 Visionary InfoTech Pvt. Ltd.
             </h1>
             """,
@@ -26,16 +29,28 @@ def show_header():
 
         st.markdown(
             """
-            <h3 style="margin-top:0px;
-                       color:#555555;">
+            <h3 style="
+                margin-top:0px;
+                color:#444444;
+                font-weight:600;
+            ">
                 AI Workforce Planning & HRBP Analytics Platform
             </h3>
             """,
             unsafe_allow_html=True
         )
 
-        st.caption(
-            "Empowering HR Leaders with Workforce Intelligence"
+        st.markdown(
+            """
+            <div style="
+                color:#666666;
+                font-size:16px;
+                margin-top:6px;
+            ">
+                Empowering HR Leaders with Workforce Intelligence
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
     st.divider()

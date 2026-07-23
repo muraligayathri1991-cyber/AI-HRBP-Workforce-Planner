@@ -10,6 +10,7 @@ from datetime import datetime
 from header import show_header
 from sidebar import sidebar_filters
 from ai_engine import get_ai_response
+from theme import apply_theme
 
 
 # =====================================================
@@ -22,6 +23,11 @@ st.set_page_config(
     layout="wide"
 )
 
+# =====================================================
+# APPLY THEME
+# =====================================================
+
+apply_theme()
 
 # =====================================================
 # LOAD DATA

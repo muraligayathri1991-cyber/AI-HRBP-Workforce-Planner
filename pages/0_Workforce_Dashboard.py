@@ -40,21 +40,57 @@ show_header()
 # DASHBOARD INTRODUCTION
 # =====================================================
 
-st.info(
+st.markdown(
     """
-👋 **Welcome to the Visionary InfoTech Workforce Intelligence Dashboard**
+    <div style="
+        background-color: rgba(255,255,255,0.96);
+        padding:18px;
+        border-radius:12px;
+        border-left:6px solid #0B3D91;
+        margin-bottom:20px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.10);
+    ">
 
-This platform enables HR Business Partners to monitor workforce trends,
-analyze organizational data, and make informed people decisions through
-interactive analytics and AI-powered insights.
-"""
+    <h3 style="
+        color:#0B3D91;
+        margin-top:0;
+        margin-bottom:10px;
+    ">
+    👋 Welcome to the Visionary InfoTech Workforce Intelligence Dashboard
+    </h3>
+
+    <p style="
+        color:#222222;
+        font-size:16px;
+        line-height:1.7;
+        margin-bottom:0;
+    ">
+    This platform enables HR Business Partners to monitor workforce trends,
+    analyze organizational data, and make informed people decisions through
+    interactive analytics and AI-powered insights.
+    </p>
+
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
 
 # =====================================================
 # EXECUTIVE SUMMARY
 # =====================================================
 
-st.subheader("📊 Executive Summary")
+st.markdown(
+    """
+    <h2 style="
+        color:#0B3D91;
+        font-weight:700;
+        margin-bottom:15px;
+    ">
+        📊 Executive Summary
+    </h2>
+    """,
+    unsafe_allow_html=True,
+)
 
 col1, col2, col3 = st.columns(3)
 
@@ -99,7 +135,18 @@ col6.metric(
 
 st.divider()
 
-st.subheader("📌 Workforce Insights")
+st.markdown(
+    """
+    <h2 style="
+        color:#0B3D91;
+        font-weight:700;
+        margin-bottom:15px;
+    ">
+        📌 Workforce Insights
+    </h2>
+    """,
+    unsafe_allow_html=True,
+)
 
 department_count = employees["Department"].value_counts()
 
@@ -147,7 +194,18 @@ colC.metric(
 
 st.divider()
 
-st.subheader("🆕 Recent Joiners")
+st.markdown(
+    """
+    <h2 style="
+        color:#0B3D91;
+        font-weight:700;
+        margin-bottom:15px;
+    ">
+        🆕 Recent Joiners
+    </h2>
+    """,
+    unsafe_allow_html=True,
+)
 
 employees["Joining Date"] = pd.to_datetime(
     employees["Joining Date"]
@@ -167,36 +225,40 @@ col1, col2 = st.columns(2)
 for i, (_, row) in enumerate(recent_joiners.iterrows()):
 
     if i % 2 == 0:
+
         with col1:
-            st.write(
-                f"👤 **{row['Employee Name']}**"
-            )
 
-            st.caption(
-                f"{row['Designation']} | {row['Department']}"
-            )
+            with st.container(border=True):
 
-            st.caption(
-                f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
-            )
+                st.markdown(
+                    f"### 👤 {row['Employee Name']}"
+                )
 
-            st.markdown("")
+                st.markdown(
+                    f"**{row['Designation']} | {row['Department']}**"
+                )
+
+                st.caption(
+                    f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
+                )
 
     else:
+
         with col2:
-            st.write(
-                f"👤 **{row['Employee Name']}**"
-            )
 
-            st.caption(
-                f"{row['Designation']} | {row['Department']}"
-            )
+            with st.container(border=True):
 
-            st.caption(
-                f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
-            )
+                st.markdown(
+                    f"### 👤 {row['Employee Name']}"
+                )
 
-            st.markdown("")
+                st.markdown(
+                    f"**{row['Designation']} | {row['Department']}**"
+                )
+
+                st.caption(
+                    f"Joined on {row['Joining Date'].strftime('%d %b %Y')}"
+                )
 
 # =====================================================
 # DASHBOARD REPORT EXPORT
@@ -204,7 +266,18 @@ for i, (_, row) in enumerate(recent_joiners.iterrows()):
 
 st.divider()
 
-st.subheader("📥 Download Dashboard Report")
+st.markdown(
+    """
+    <h2 style="
+        color:#0B3D91;
+        font-weight:700;
+        margin-bottom:15px;
+    ">
+        📥 Download Dashboard Report
+    </h2>
+    """,
+    unsafe_allow_html=True,
+)
 
 report_data = pd.DataFrame({
     "Metric": [

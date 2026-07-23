@@ -4,6 +4,7 @@ import plotly.express as px
 
 from sidebar import sidebar_filters
 from header import show_header
+from theme import apply_theme
 
 # =====================================================
 # PAGE CONFIG
@@ -14,6 +15,12 @@ st.set_page_config(
     page_icon="📈",
     layout="wide"
 )
+
+# =====================================================
+# APPLY THEME
+# =====================================================
+
+apply_theme()
 
 # =====================================================
 # READ EMPLOYEE DATA
@@ -139,7 +146,7 @@ designation.columns = [
 
 experience_band = pd.cut(
     employees["Experience (Years)"],
-    bins=[0,2,5,8,12,50],
+    bins=[0, 2, 5, 8, 12, 50],
     labels=[
         "0-2 Years",
         "2-5 Years",
@@ -223,6 +230,7 @@ with right:
 # =====================================================
 
 left, right = st.columns(2)
+
 with left:
 
     fig3 = px.bar(

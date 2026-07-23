@@ -3,6 +3,7 @@ import pandas as pd
 
 from sidebar import sidebar_filters
 from header import show_header
+from theme import apply_theme
 
 # =====================================================
 # PAGE CONFIG
@@ -15,6 +16,12 @@ st.set_page_config(
 )
 
 # =====================================================
+# APPLY THEME
+# =====================================================
+
+apply_theme()
+
+# =====================================================
 # READ EMPLOYEE DATA
 # =====================================================
 
@@ -22,7 +29,10 @@ employees = pd.read_excel(
     "data/Visionary_InfoTech_Employee_Master_Data.xlsx"
 )
 
-# Apply Sidebar Filters
+# =====================================================
+# APPLY SIDEBAR FILTERS
+# =====================================================
+
 employees = sidebar_filters(employees)
 
 # =====================================================
